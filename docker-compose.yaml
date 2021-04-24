@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  svc-bills:
+    image: wortiz1027/svc-products:latest
+    container_name: svc-products
+    hostname: svc-products
+    restart: always
+    ports:
+      - 8083:8083
+      - 6183:6183
+    environment:
+      - SERVER_CONFIG=http://server-config:7070
+      - SERVER_DISCOVERY=http://server-discovery:7071/eureka
+      - EUREKA_HOST=server-discovery
+      - BROKER_HOST=server-broker
+    networks:
+      - ntw_backend
+networks:
+  ntw_backend:
+    external: true
